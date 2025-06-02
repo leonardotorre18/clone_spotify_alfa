@@ -1,11 +1,33 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import SongCard from "../components/SongCard.tsx";
+import Layout from "../layouts/Layout.astro";
+import type { ISong } from "../types/song";
+import SongBar from "../components/SongBar.tsx";
+import { Songs } from "../store/store";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const data: ISong[] = await fetch(import.meta.env.API_URL + 'songs').then(res => res.json()).then(res => res.songs)
+Songs.set(data)
 ---
 
 <Layout>
-	<Welcome />
+    <div class="song-container">
+    {
+        Songs.get().map(song => (
+            <SongCard
+                client:visible
+                song={song}
+            />
+        ))
+    }
+    </div>
+    <SongBar client:load />
 </Layout>
+
+<style>
+    .song-container {
+        display: grid;
+        padding: 30px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+    }
+</style>

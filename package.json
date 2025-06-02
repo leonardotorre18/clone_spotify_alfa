@@ -9,6 +9,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.8.0"
+    "@astrojs/react": "^4.3.0",
+    "@iconify-json/mdi": "^1.2.3",
+    "@types/react": "^19.1.5",
+    "@types/react-dom": "^19.1.5",
+    "astro": "^5.8.0",
+    "astro-icon": "^1.1.5",
+    "nanostores": "^1.0.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }
