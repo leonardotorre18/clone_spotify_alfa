@@ -3,16 +3,14 @@ import SongCard from "../components/SongCard.tsx";
 import Layout from "../layouts/Layout.astro";
 import type { ISong } from "../types/song";
 import SongBar from "../components/SongBar.tsx";
-import { Songs } from "../store/store";
 
 const data: ISong[] = await fetch(import.meta.env.API_URL + 'songs').then(res => res.json()).then(res => res.songs)
-Songs.set(data)
 ---
 
 <Layout>
     <div class="song-container">
     {
-        Songs.get().map(song => (
+        data.map(song => (
             <SongCard
                 client:visible
                 song={song}

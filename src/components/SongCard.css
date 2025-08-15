@@ -33,6 +33,8 @@
 }
 .song-card__body__line {
     border-color: var(--color-accent);
+    transition: border .3s ease-in;
+    transition: filter .3s ease-in;
 }
 .song-card__body__controls {
     display: flex;

@@ -1,4 +1,4 @@
-import { CurrentSong } from '../store/store'
+import { useSong } from '../store/store'
 import type { ISong } from '../types/song'
 import './SongCard.css'
 
@@ -11,8 +11,13 @@ export default function ({
         image
     } = song
 
+    const { 
+        updateSong, 
+        song: currentSong 
+    } = useSong()
+
     const handlerClick = () => {
-        CurrentSong.set(song)
+        updateSong(song)
     }
 
     return (
@@ -26,7 +31,15 @@ export default function ({
                         <h3 className="song-card__body__info__title">{title}</h3>
                         <p className="song-card__body__info__artist">{author}</p>
                     </div>
-                    <hr className="song-card__body__line" />
+                    <hr className="song-card__body__line" style={
+                        currentSong?._id == song._id ? 
+                        {
+                            filter: 'blur(1px)',
+                            borderColor: '#fff'
+                        } : {
+
+                        }
+                    } />
                     <div className="song-card__body__controls">
                         <div className="song-card__body__controls__icons">
                             {/* <Icon name='mdi:heart-outline' />

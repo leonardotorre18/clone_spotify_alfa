@@ -1,26 +1,19 @@
 // import type { ISong } from '../types/song'
-import React, { type ChangeEvent, type SyntheticEvent } from 'react'
+import React, { type ChangeEvent } from 'react'
 import './SongBar.css'
-import { CurrentSong } from '../store/store'
-import type { ISong } from '../types/song'
+import { useSong } from '../store/store'
 import { IoPause, IoPlay } from 'react-icons/io5'
 
 export default function () {
-  const [song, setSong] = React.useState<ISong | null>(null)
   const [play, setPlay] = React.useState<boolean>(false)
   const [progress, setProgress] = React.useState<number>(0)
+  const { song } = useSong()
 
   const audioRef = React.useRef<HTMLAudioElement | null>(null)
 
   React.useEffect(() => {
-    CurrentSong.subscribe(song => {
-      setSong(song)
-      setPlay(true)
-    })
-  }, [])
-
-  React.useEffect(() => {
     const intervalID = setInterval(() => updateProgress(), 1000)
+    setPlay(true)
     return () => {
       clearInterval(intervalID)
     }
