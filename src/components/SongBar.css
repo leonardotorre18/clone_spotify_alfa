@@ -1,11 +1,18 @@
 .song-bar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 16px var(--padding-x-md);
-
+    gap: 24px;
     position: sticky;
-    bottom: 0;
+    bottom: 0px;
     background-color: var(--color-background);
+}
+
+@media (max-width: 768px) {
+    .song-bar {
+        flex-direction: column;
+    }
 }
 
 .song-bar__info {
@@ -28,7 +35,17 @@
     opacity: .6;
 }
 
-.song-bar__controls__buttons svg {
+.song-bar__controls {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+}
+
+.song-bar__controls__buttons button svg {
     height: var(--icon-size-md);
+    min-height: var(--icon-size-md);
     width: var(--icon-size-md);
+    min-width: var(--icon-size-md);
+    color: #f2f2f2;
+    display: block;
 }
